@@ -6,8 +6,11 @@ namespace Sopra.Labs.ConsoleApp1
     {
         static void Main(string[] args)
         {
-            MostrarTablaMultiplicar();
+           //MostrarTablaMultiplicar();
+           //MostrarValores();
+           CalcularValores();
            // CalcularLetraDNI();
+           
         }
 
 
@@ -67,6 +70,26 @@ namespace Sopra.Labs.ConsoleApp1
 
         static void MostrarValores()
         {
+            Console.WriteLine("Escriba el valor inicial");
+            int valorInicial = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Escriba el valor final");
+            int valorFinal = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Especifique la magnitud del salto");
+            int magnitudSalto = int.Parse(Console.ReadLine());
+
+            int valor = valorInicial;
+            int signo = 1;
+            
+            if (valorInicial > valorFinal) { signo = -1; }
+            
+            while (signo*valor <= signo*valorFinal)
+            {
+               Console.WriteLine(valor);
+               valor = valor + signo*magnitudSalto;
+               if (signo*valor > signo*valorFinal) { Console.WriteLine(valorFinal); }
+            }
             // desde el valor de inicio al valor final en saltos. el usuario indica tanto los valores de inicio y final como la magnitud del salto
         }
 
@@ -74,7 +97,35 @@ namespace Sopra.Labs.ConsoleApp1
 
         static void CalcularValores()
         {
-            
+            Console.WriteLine("¿cuántos valores desea introducir?");
+            int numeroValores = int.Parse(Console.ReadLine());
+            int[] conjuntoValores = new int[numeroValores];
+
+            for (int i = 0; i < numeroValores; i++)
+            {
+                Console.WriteLine($"introduzca el valor numero {i+1}");
+                conjuntoValores[i] = int.Parse(Console.ReadLine());
+            }
+
+            int max = conjuntoValores[0]; 
+            int min = conjuntoValores[0];
+            int suma = 0;
+
+            foreach (var item in conjuntoValores)
+            {
+               if (item > max) { max = item; }
+               if (item < min) { min = item; }
+ 
+               suma = suma + item;
+            }
+
+            var media = suma/numeroValores;
+
+            Console.WriteLine($"El valor máximo es: {max}");
+            Console.WriteLine($"El valor mínimo es: {min}");
+            Console.WriteLine($"El valor medio es: {media}");
+            Console.WriteLine($"La suma total es: {suma}");
+
             //numero de valores
             // almacenamos en un Array
             // calculo de max, min, media, suma
