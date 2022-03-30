@@ -8,22 +8,42 @@ namespace Sopra.Labs.ConsoleApp1
         {
  
             //MostrarTablaMultiplicar();
-            MostrarValores();
+            // MostrarValores();
             //CalcularValores();
-           // CalcularLetraDNI();
+            CalcularLetraDNI();
            
         }
+        /// <summary>
+        /// Se demanda un valor al usuario y no se acepta la entrada hasta que no corresponde con un entero.
+        /// </summary>
+        /// <param name="textoNormal"></param>
+        /// <param name="textoValorNoValido"></param>
+        /// <returns></returns>
+        static int ForzarEntradaInt(string textoNormal = "", string textoValorNoValido = "Debe introducirse un número ENTERO" )
+        {
+            int numeroEntero;
+            bool valido = false;
 
+            do
+            {
+              Console.WriteLine(textoNormal);
+              valido = int.TryParse(Console.ReadLine(), out numeroEntero);
+              if (!valido)
+              {
+                  Console.WriteLine(textoValorNoValido);
+              }  
+            
+            } while (!valido);
+
+            return numeroEntero;
+        }
 
         /// <summary>
         /// Muestra la tabla de multiplicar del número introducido por el usuario.
         /// </summary>
         static void MostrarTablaMultiplicar()
         {
-            Console.WriteLine("Introduzca un número para calcular Tabla de Multiplicar");
-            string num = Console.ReadLine();
-
-            int n = int.Parse(num);
+            int num = ForzarEntradaInt("Introduzca número para calcular Tabla de Multiplicar");
 
 
             //usando for
@@ -52,10 +72,10 @@ namespace Sopra.Labs.ConsoleApp1
 
 
             Console.WriteLine("Usando for:");
-            TablaMultiplicarFor(n);
+            TablaMultiplicarFor(num);
 
             Console.WriteLine("Usando while:");
-            TablaMultiplicarWhile(n);
+            TablaMultiplicarWhile(num);
 /*
             Console.Clear();
             Console.WriteLine();
@@ -75,31 +95,13 @@ namespace Sopra.Labs.ConsoleApp1
         /// </summary>
         static void MostrarValores()
         {
-            //Console.WriteLine("Escriba el valor inicial");
-            //int valorInicial = int.Parse(Console.ReadLine());
 
-            //Console.WriteLine("Escriba el valor final");
-            //int valorFinal = int.Parse(Console.ReadLine());
+            int valorInicial = ForzarEntradaInt("Escriba el valor inicial");
 
-            //Console.WriteLine("Especifique la magnitud del salto");
-            //int magnitudSalto = int.Parse(Console.ReadLine());
+            int valorFinal = ForzarEntradaInt("Escriba el valor final");
 
-           
-            Console.WriteLine("Escriba el valor inicial");
-            bool vIValido = int.TryParse(Console.ReadLine(), out int valorInicial);
-                
-            Console.WriteLine("Escriba el valor final");
-            bool vFValido = int.TryParse(Console.ReadLine(), out int valorFinal);
-                
-            Console.WriteLine("Especifique la magnitud del salto");
-            bool mSValido = int.TryParse(Console.ReadLine(), out int magnitudSalto);
+            int magnitudSalto = ForzarEntradaInt("Escriba la magnitud del salto");
 
-            if (!vIValido || !vFValido || !mSValido)
-            {
-                Console.WriteLine("TODOS los valores introducidos deben ser enteros");
-                MostrarValores();
-                return;
-            }
 
 
             int valor = valorInicial;
@@ -121,14 +123,12 @@ namespace Sopra.Labs.ConsoleApp1
         /// </summary>
         static void CalcularValores()
         {
-            Console.WriteLine("¿cuántos valores desea introducir?");
-            int numeroValores = int.Parse(Console.ReadLine());
+            int numeroValores = ForzarEntradaInt("¿cuántos valores desea introducir?");
             int[] conjuntoValores = new int[numeroValores];
 
             for (int i = 0; i < numeroValores; i++)
             {
-                Console.WriteLine($"introduzca el valor numero {i+1}");
-                conjuntoValores[i] = int.Parse(Console.ReadLine());
+                conjuntoValores[i] = ForzarEntradaInt($"Introduzca el elemento número {i+1}");
             }
 
             int max = conjuntoValores[0]; 
@@ -161,18 +161,16 @@ namespace Sopra.Labs.ConsoleApp1
         /// </summary>
         static void CalcularLetraDNI()
         {
-            Console.WriteLine("Introduzca los 8 dígitos de su DNI");
-            string entrada = Console.ReadLine();
-            int DNI = int.Parse(entrada);
+            int NIF = ForzarEntradaInt("Introduzca los 8 dígitos de su DNI");
             
-            if (DNI <10000000 || DNI >99999999)
+            if (NIF <10000000 || NIF >99999999)
             {
                 Console.WriteLine("Introduzca un DNI válido");
                 CalcularLetraDNI();
                 return;
             }
 
-            var resto = DNI % 23;
+            var resto = NIF % 23;
             char[] letras = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E' };
 
             var letra = letras.GetValue(resto);
