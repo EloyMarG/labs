@@ -6,9 +6,10 @@ namespace Sopra.Labs.ConsoleApp1
     {
         static void Main(string[] args)
         {
-           //MostrarTablaMultiplicar();
-           //MostrarValores();
-           CalcularValores();
+ 
+            //MostrarTablaMultiplicar();
+            MostrarValores();
+            //CalcularValores();
            // CalcularLetraDNI();
            
         }
@@ -74,14 +75,32 @@ namespace Sopra.Labs.ConsoleApp1
         /// </summary>
         static void MostrarValores()
         {
+            //Console.WriteLine("Escriba el valor inicial");
+            //int valorInicial = int.Parse(Console.ReadLine());
+
+            //Console.WriteLine("Escriba el valor final");
+            //int valorFinal = int.Parse(Console.ReadLine());
+
+            //Console.WriteLine("Especifique la magnitud del salto");
+            //int magnitudSalto = int.Parse(Console.ReadLine());
+
+           
             Console.WriteLine("Escriba el valor inicial");
-            int valorInicial = int.Parse(Console.ReadLine());
-
+            bool vIValido = int.TryParse(Console.ReadLine(), out int valorInicial);
+                
             Console.WriteLine("Escriba el valor final");
-            int valorFinal = int.Parse(Console.ReadLine());
-
+            bool vFValido = int.TryParse(Console.ReadLine(), out int valorFinal);
+                
             Console.WriteLine("Especifique la magnitud del salto");
-            int magnitudSalto = int.Parse(Console.ReadLine());
+            bool mSValido = int.TryParse(Console.ReadLine(), out int magnitudSalto);
+
+            if (!vIValido || !vFValido || !mSValido)
+            {
+                Console.WriteLine("TODOS los valores introducidos deben ser enteros");
+                MostrarValores();
+                return;
+            }
+
 
             int valor = valorInicial;
             int signo = 1;
