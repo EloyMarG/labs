@@ -68,6 +68,10 @@ namespace Sopra.Labs.ConsoleApp1
 */
         }
 
+        /// <summary>
+        /// Pregunta al usuario por un valor Inical y Final, así como la magnitud del salto que desea.
+        /// Por consola se muestran valores desde el inicial hasta el final en saltos de la magnitud especificada.
+        /// </summary>
         static void MostrarValores()
         {
             Console.WriteLine("Escriba el valor inicial");
@@ -93,8 +97,9 @@ namespace Sopra.Labs.ConsoleApp1
             // desde el valor de inicio al valor final en saltos. el usuario indica tanto los valores de inicio y final como la magnitud del salto
         }
 
-
-
+        /// <summary>
+        /// Se calcula y muestra por consola el máximo, mínimo, media y suma total de una serie de valores introducidos por el usuario, 
+        /// </summary>
         static void CalcularValores()
         {
             Console.WriteLine("¿cuántos valores desea introducir?");
@@ -113,6 +118,7 @@ namespace Sopra.Labs.ConsoleApp1
 
             foreach (var item in conjuntoValores)
             {
+
                if (item > max) { max = item; }
                if (item < min) { min = item; }
  
@@ -131,7 +137,9 @@ namespace Sopra.Labs.ConsoleApp1
             // calculo de max, min, media, suma
         }
 
-
+        /// <summary>
+        /// Calcula la letra correspondiente a la parte numérica de un DNI introducido por el usuario 
+        /// </summary>
         static void CalcularLetraDNI()
         {
             Console.WriteLine("Introduzca los 8 dígitos de su DNI");
